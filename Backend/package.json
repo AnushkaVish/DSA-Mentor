@@ -12,11 +12,11 @@
     "leetcode",
     "backend"
   ],
-  "author": "Deepak Vishwakarma",
+  "author": "Anushka Vishwakarma",
   "license": "ISC",
   "type": "commonjs",
   "engines": {
-    "node": ">=18"
+    "node": "18.x"
   },
   "dependencies": {
     "@google/genai": "^1.16.0",
@@ -29,6 +29,7 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "jwa": "^2.0.1",
     "mongodb": "^7.1.1",
     "mongoose": "^8.23.0",
     "multer": "^2.0.2",
