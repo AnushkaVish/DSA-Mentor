@@ -5,8 +5,17 @@ const redisClient = require("../config/redis")
 const adminMiddleware = async (req,res,next)=>{
 
     try{
-       
-        const {token} = req.cookies;
+        let token = req.cookies.token;
+        
+        // Fallback to Authorization header if cookie is missing
+        if (!token && req.headers.authorization) {
+            if (req.headers.authorization.startsWith('Bearer ')) {
+                token = req.headers.authorization.split(' ')[1];
+            } else {
+                token = req.headers.authorization;
+            }
+        }
+
         if(!token)
             throw new Error("Token is not present");
 
@@ -24,8 +33,8 @@ const adminMiddleware = async (req,res,next)=>{
             throw new Error("User Doesn't Exist");
         }
 
-        // Check role (case-insensitive and support Role/role)
-        const userRole = (payload.role || payload.Role || result.role || "").toLowerCase();
+        // Check role - prioritizing DB role for real-time updates
+        const userRole = (result.role || payload.role || payload.Role || "").toLowerCase();
         if(userRole !== 'admin')
             throw new Error("Access Denied: Admin role required");
 

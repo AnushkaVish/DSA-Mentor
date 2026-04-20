@@ -203,27 +203,33 @@ const InterviewPrepStudio = () => {
   };
 
   // Enable/disable video
-  const enableVideo = async () => {
-    try {
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach(track => track.stop());
-      }
-      
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" },
-        audio: false
-      });
-      
-      streamRef.current = stream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
-      setVideoEnabled(true);
-    } catch (error) {
-      console.error("Error accessing video device:", error);
-      setRecognitionError("Please allow access to camera");
+ const enableVideo = async () => {
+  try {
+    // Stop old stream
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop());
     }
-  };
+
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: true, // 🔥 simplified (fixes many devices)
+      audio: false
+    });
+
+    streamRef.current = stream;
+
+    if (videoRef.current) {
+      videoRef.current.srcObject = stream;
+
+      // 🔥 MOST IMPORTANT FIX
+      await videoRef.current.play().catch(() => {});
+    }
+
+    setVideoEnabled(true);
+  } catch (error) {
+    console.error("Error accessing video device:", error);
+    setRecognitionError("Camera access denied or not working");
+  }
+};
 
   const disableVideo = () => {
     if (streamRef.current) {
@@ -358,6 +364,18 @@ const InterviewPrepStudio = () => {
       setMicEnabled(false);
     }
   };
+
+  // Sync video stream to video element
+  useEffect(() => {
+    if (videoEnabled && videoRef.current && streamRef.current) {
+      if (videoRef.current.srcObject !== streamRef.current) {
+        videoRef.current.srcObject = streamRef.current;
+      }
+      videoRef.current.play().catch(err => {
+        console.warn("Video play failed:", err);
+      });
+    }
+  }, [videoEnabled, session]);
 
   // Timer effects
   useEffect(() => {
@@ -792,15 +810,14 @@ const InterviewPrepStudio = () => {
 
               {/* User Video */}
               <div className="bg-gray-900 border border-gray-700 rounded-lg overflow-hidden mb-4 relative h-64">
-                {videoEnabled ? (
-                  <video 
-                    ref={videoRef} 
-                    autoPlay 
-                    muted 
-                    playsInline 
-                    className="w-full h-full object-cover" 
-                  />
-                ) : (
+                <video 
+                  ref={videoRef} 
+                  autoPlay 
+                  muted 
+                  playsInline 
+                  className={`w-full h-full object-cover bg-black ${!videoEnabled ? 'hidden' : ''}`}
+                />
+                {!videoEnabled && (
                   <div className="w-full h-full flex items-center justify-center">
                     <VideoOff className="h-12 w-12 text-gray-500" />
                   </div>
