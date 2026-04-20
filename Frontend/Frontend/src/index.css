@@ -1,0 +1,418 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+
+/* Custom Scrollbar for better aesthetics */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* for vertical scrollbars */
+  height: 8px; /* for horizontal scrollbars */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #333; /* dark background for track */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #555; /* color of the scroll thumb */
+  border-radius: 10px;
+  border: 2px solid #333; /* padding around thumb */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #777; /* lighter color on hover */
+}
+
+/* Modern Tab Styles and Animation */
+.tab-modern {
+  @apply relative py-3 px-6 text-base-content hover:text-primary transition-colors duration-200 text-lg; /* Increased padding and text size */
+  outline: none; /* Remove default focus outline */
+}
+
+.tab-modern.tab-active {
+  @apply text-primary font-semibold;
+}
+
+.tab-modern.tab-active::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-full h-[3px] bg-primary rounded-full;
+  animation: tab-underline-grow 0.3s ease-out forwards; /* CSS animation */
+}
+
+@keyframes tab-underline-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Content Fade Transition (for active tab content) */
+.transition-opacity {
+  transition-property: opacity;
+}
+.duration-300 {
+  transition-duration: 300ms;
+}
+/* You can add more complex slide-in/out if you desire, but opacity is simple and effective */
+
+/* Animated Dot Pulse for Console Button */
+.dot-pulse {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: currentColor; /* Use current text color */
+  margin-right: 8px;
+  animation: pulse-animation 1.5s infinite ease-in-out;
+  opacity: 0.7;
+}
+
+@keyframes pulse-animation {
+  0% { transform: scale(0.8); opacity: 0.7; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.8); opacity: 0.7; }
+}
+
+/* Customizing Tailwind's default alert styles for better dark mode contrast */
+.alert-success {
+    @apply bg-green-800 text-green-100 border-green-700;
+}
+.alert-error {
+    @apply bg-red-800 text-red-100 border-red-700;
+}
+.alert-info {
+    @apply bg-blue-800 text-blue-100 border-blue-700;
+}
+.alert-warning {
+    @apply bg-yellow-800 text-yellow-100 border-yellow-700;
+}
+
+/* Ensure prose styles adapt to dark mode */
+.prose.dark\:prose-invert h1, .prose.dark\:prose-invert h2, .prose.dark\:prose-invert h3, .prose.dark\:prose-invert h4, .prose.dark\:prose-invert p, .prose.dark\:prose-invert strong {
+  @apply text-base-content; /* Ensure headings and text are visible */
+}
+
+
+
+
+.code-block pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.code-block code {
+    font-family: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--bc) / 0.2);
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--bc) / 0.4);
+}
+
+
+/* index.css or App.css */
+
+/* Custom Tab Styling */
+.tab-modern {
+    @apply relative py-3 px-6 text-sm font-semibold text-base-content/70 transition-all duration-300 ease-in-out cursor-pointer;
+}
+
+.tab-modern:hover {
+    @apply text-primary; /* Uses DaisyUI primary color for hover */
+}
+
+.tab-modern.tab-active {
+    @apply text-primary; /* Active tab text color uses DaisyUI primary */
+}
+.tab-modern.tab-active::after {
+    content: "";
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-primary transform scale-x-100 transition-transform duration-300 ease-in-out;
+}
+.tab-modern::after { /* for inactive tabs - ensures transition works */
+    content: "";
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-transparent transform scale-x-0 transition-transform duration-300 ease-in-out;
+}
+
+
+/* Custom Scrollbar for better dark theme integration */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px; /* For vertical scrollbars */
+    height: 8px; /* For horizontal scrollbars */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--fallback-b3, oklch(var(--b3) / 1)); /* Uses base-300 for track */
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--fallback-p, oklch(var(--p) / 1)); /* Uses primary color for thumb */
+    border-radius: 10px;
+    border: 2px solid var(--fallback-b3, oklch(var(--b3) / 1)); /* Border same as track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--fallback-a, oklch(var(--a) / 1)); /* Uses accent color on hover */
+}
+
+/* Dot Pulse Animation (if not already defined) */
+.dot-pulse {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: var(--fallback-a, oklch(var(--a) / 1)); /* Uses DaisyUI accent */
+  color: var(--fallback-a, oklch(var(--a) / 1));
+  box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7); /* Hardcoded orange for shadow, can be made dynamic */
+  animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+.dot-pulse::before, .dot-pulse::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--fallback-a, oklch(var(--a) / 1)); /* Uses DaisyUI accent */
+  border-radius: 5px;
+  box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7); /* Hardcoded orange for shadow */
+  animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+.dot-pulse::before {
+  animation-delay: 0.1s;
+}
+.dot-pulse::after {
+  animation-delay: 0.2s;
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Custom prose styling to apply primary color to links/headings if desired */
+/* Add this to your tailwind.config.js 'theme.extend.typography' if you want to configure prose-primary */
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .prose-primary a {
+    color: var(--fallback-p, oklch(var(--p) / 1));
+  }
+  .prose-primary h1, .prose-primary h2, .prose-primary h3, .prose-primary h4 {
+    color: var(--fallback-p, oklch(var(--p) / 1));
+  }
+}
+*/
+
+
+/* Add this to your global CSS file (index.css or App.css) */
+:root {
+  --bg-primary: #f9fafb;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f8fafc;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --border-color: #e2e8f0;
+}
+
+.dark {
+  --bg-primary: #1a2332;
+  --bg-secondary: #232b3b;
+  --bg-tertiary: #151c28;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+/* Ensure all elements inherit the theme colors */
+* {
+  transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
+}
+
+
+/* Add this to your global CSS file */
+body.light-mode {
+  background-color: #ffffff !important;
+  color: #1e293b !important;
+}
+
+body.dark-mode {
+  background-color: #1a2332 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Force light background for all elements in light mode */
+.light-mode * {
+  background-color: inherit;
+  color: inherit;
+}
+
+/* Smooth transitions */
+body, body * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* Specific component styling for light mode */
+.light-mode .bg-white {
+  background-color: white !important;
+}
+
+.light-mode .bg-gray-50 {
+  background-color: #f9fafb !important;
+}
+
+.light-mode .text-gray-900 {
+  color: #1a202c !important;
+}
+
+.light-mode .text-gray-700 {
+  color: #4a5568 !important;
+}
+
+.light-mode .border-gray-200 {
+  border-color: #e2e8f0 !important;
+}
+
+.light-mode .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Smooth dropdown animations */
+.user-dropdown {
+  transition: all 0.3s ease;
+}
+
+/* Dropdown menu animation */
+.user-dropdown > div:last-child {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure dropdown has proper z-index */
+.user-dropdown .absolute {
+  z-index: 1000;
+}
+
+/* Hover effects for dropdown items */
+.user-dropdown a:hover,
+.user-dropdown button:hover {
+  transform: translateX(2px);
+  transition: transform 0.2s ease;
+}
+
+/* Ensure smooth transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Force dark mode classes to work properly */
+.dark {
+  color-scheme: dark;
+}
+
+/* Optional: Add these styles for better dark mode support */
+body {
+ 
+  color: #1f2937; /* light mode text */
+}
+
+.dark body {
+  background-color: #1a2332; /* dark mode background */
+  color: #e2e8f0; /* dark mode text */
+}
+
+
+@keyframes borderColorCycle {
+  0%   { border-color: orange; }
+  33%  { border-color: purple; }
+  66%  { border-color: yellow; }
+  100% { border-color: orange; }
+}
+
+.animate-border {
+  animation: borderColorCycle 3s linear infinite;
+}
+
+
+
+
+
+.tab-modern {
+    @apply py-3 px-6 text-base-content/60 font-medium border-b-2 border-transparent transition-all duration-200 ease-in-out cursor-pointer;
+}
+
+.tab-modern:hover {
+    @apply text-primary-content/80 border-primary-content/20;
+}
+
+.tab-modern.tab-active {
+    @apply text-primary border-primary bg-base-200; /* Adjusted active tab background for visual separation */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #2a2e37; /* base-300 equivalent */
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #4a505b; /* Darker grey */
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #5a606b;
+}
+
+
+/* globals.css ya App.css mein add karo */
+body, html {
+
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Ya koi aur color chahiye to: */
+/* background-color: #1a1a2e; */
+/* background-color: #16213e; */
+/* background-color: #0d1117; */
