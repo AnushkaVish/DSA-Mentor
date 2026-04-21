@@ -221,7 +221,7 @@ const Certificate = ({
   // ───── Signature ─────
   ctx.fillStyle = C.dark;
   ctx.font = 'italic 700 40px Dancing Script';
-  ctx.fillText('Deepak Vishwakarma', W - 220, H - 100);
+  ctx.fillText('Anushka Vishwakarma', W - 220, H - 100);
 
   ctx.beginPath();
   ctx.moveTo(W - 340, H - 85);
@@ -229,7 +229,7 @@ const Certificate = ({
   ctx.stroke();
 
   ctx.font = '900 14px Montserrat';
-  ctx.fillText('DEEPAK VISHWAKARMA', W - 220, H - 60);
+  ctx.fillText('ANUSHKA VISHWAKARMA', W - 220, H - 60);
 
   ctx.fillStyle = C.light;
   ctx.font = '600 12px Montserrat';
